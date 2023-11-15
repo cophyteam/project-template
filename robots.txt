@@ -1,1 +1,1 @@
-Sitemap: https://romainligneul.github.io/cophy-project/sitemap.xml
+Sitemap: https://cophyteam.github.io/project-template/sitemap.xml
