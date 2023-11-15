@@ -1,0 +1,36 @@
+project:
+  type: website
+
+execute:
+  freeze: auto
+
+website:
+  title: "Cophy Project"
+  navbar:
+    background: dark
+    left:
+      - text: "Get started"
+        file: getstarted.qmd
+      - text: "Main tutorial"
+        file: tutorial.qmd        
+      - text: "Other tutorials"
+        menu:
+          - text: "Github"
+            file: help_github.qmd
+          - text: "SSH in VS code"
+            file: help_ssh.qmd
+          - text: "Quarto without Sudo"
+            file: help_quartonosudo.qmd
+          - text: "BetterBibTex and Zotero"
+            file: help_zotero.qmd
+  
+    right:
+      - text: "About"
+        file: about.qmd
+
+format:
+  html:
+    theme: 
+      - cerulean
+      - custom.scss
+    toc: true
