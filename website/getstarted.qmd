@@ -61,7 +61,7 @@ cd Projects
 
 1. Go on [Github](https://github.com/) and login into your account (create one if you do not have one already).
 
-2. Visit the following page: [https://github.com/romainligneul/cophy-project](https://github.com/romainligneul/cophy-project) and click on the green button *Use this template -> Create a new repository*. Give the repository any name you want. Hereafter, we will assume that you named it `mycophyproject`. You can keep it public (if you are ok for anyone to see it) or private.
+2. Visit the following page: [https://github.com/cophyteam/project-template](https://github.com/cophyteam/project-template) and click on the green button *Use this template -> Create a new repository*. Give the repository any name you want. Hereafter, we will assume that you named it `mycophyproject`. You can keep it public (if you are ok for anyone to see it) or private.
 
 3. Once it has generated the repository, click on the green button *Code* and copy paste the address of the repository (e.g. `https://github.com/yourgitname/mycophyproject.git) 
 
@@ -73,11 +73,11 @@ This proper method allows you: (i) to use private repositories and (ii) to edit 
 
 #### Quick and dirty
 
-Just type `git clone https://github.com/romainligneul/cophy-project`. Doing so will immediately get you the template repository. You won't even need a Github account or the Gitlab CLI, but it means that you will have to configure your Git by yourself (which may be the way to go if you prefer Gitlab over Git for example)
+Just type `git clone https://github.com/cophyteam/project-template`. Doing so will immediately get you the template repository. You won't even need a Github account or the Gitlab CLI, but it means that you will have to configure your Git by yourself (which may be the way to go if you prefer Gitlab over Git for example)
 
 #### Quicker and dirtier
 
-Just visit [https://github.com/romainligneul/cophy-project](https://github.com/romainligneul/cophy-project), click the gray button *Code -> Download Zip* and unzip where you want. If you choose this way, you don't even need to install Git. Although, it might be useless to do this tutorial if you don't want to use Git. 
+Just visit [https://github.com/cophyteam/project-template](https://github.com/romainligneul/cophy-project), click the gray button *Code -> Download Zip* and unzip where you want. If you choose this way, you don't even need to install Git. Although, it might be useless to do this tutorial if you don't want to use Git. 
 
 ### Finish the configuration
 
