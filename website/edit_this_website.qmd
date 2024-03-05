@@ -19,11 +19,14 @@ To modify this website you'll have to:
 5. Make the change you want to do in the `website` folder. 
 
 ::: {.alert .alert-dismissible .alert-warning} 
-Please only edit the .qmd files within the `website` folder and the website->navbar area of the file .website/_quarto.yml (only needed if you want to add a new .qmd web page). 
-In principle, you should not need to do other changes. You may play with the .scss file if you know what you are doing.
+Please only edit the .qmd files within the "website" folder. 
+If you want to add a new .qmd web page, then you'll have to update the file .website/_quarto.yml (website: navbar: zone).
+In principle, you should not need to changes other file. You may play with the .scss file if you know what you are doing.
 :::
 
-6. Add, commit and push to the main branch. This should automatically trigger and update of the [website](https://cophyteam.github.io/project-template) after a few minutes (you can check the deployment process [here](https://github.com/cophyteam/project-template/actions))
+6. Add, commit and push to the main branch. 
+
+7 Type `cd website` and `quarto publish gh-pages`. This should automatically trigger and update of the [website](https://cophyteam.github.io/project-template) after a few minutes (you can check the deployment process [here](https://github.com/cophyteam/project-template/actions))
 
 
-Simple, isn't it? ::bulb::
+Simple, isn't it?

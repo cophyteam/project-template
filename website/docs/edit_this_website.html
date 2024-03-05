@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Cophy Project - Quick tutorial for Git/Github</title>
+<title>Cophy Project - How to edit this website</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -139,21 +139,14 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#if-you-have-adminsudo-rights" id="toc-if-you-have-adminsudo-rights" class="nav-link active" data-scroll-target="#if-you-have-adminsudo-rights">If you have admin/sudo rights</a></li>
-  <li><a href="#if-you-dont-have-adminsudo-rights-e.g.-on-the-cluster" id="toc-if-you-dont-have-adminsudo-rights-e.g.-on-the-cluster" class="nav-link" data-scroll-target="#if-you-dont-have-adminsudo-rights-e.g.-on-the-cluster">If you don’t have admin/sudo rights (e.g.&nbsp;on the cluster)</a></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Quick tutorial for Git/Github</h1>
+<h1 class="title">How to edit this website</h1>
 </div>
 
 
@@ -170,39 +163,23 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>If you only plan to clone public repositories, you can probably just use <code>git clone https://</code> or simply download and unzip the repository of interest.</p>
-<p>However, you will need to connect your command line to your Github account in the following scenarios:</p>
-<ul>
-<li><p>to clone private repositories that you own or one which you have been added as a collaborator.</p></li>
-<li><p>to perform any write operation in the repository (e.g.&nbsp;push, pull, merge, branch, etc.)</p></li>
-</ul>
-<section id="if-you-have-adminsudo-rights" class="level3">
-<h3 class="anchored" data-anchor-id="if-you-have-adminsudo-rights">If you have admin/sudo rights</h3>
+<p>To modify this website you’ll have to:</p>
 <ol type="1">
-<li><p>If you don’t have Github, create an account.</p></li>
-<li><p>Install the <a href="https://cli.github.com/">Github CLI</a> utility that will allow you to connect your command line to your Github repository.</p></li>
-<li><p>Restart your terminal (or Visual Code), reopen it, and type <code>gh auth login</code>. Choose Github.com, HTTPS, Login with a web browser (or use an auth token if you prefer)</p></li>
-<li><p>CD to the directory where your <em>example.md</em> file is located and type <code>git init</code> in the command line. This preconfigures the folder as a Git repository.</p></li>
-<li><p>In Github, create a new repository. For example, name it “example-collaborative-writing”. If you create a public repository, everyone on the web will be able to see the repository and its content. If you create a private repository, only the Github contact that you will manually add to the repository will be able to see it and its content. Most often, you’ll want to create private repositories to work with specific colleagues.</p></li>
-<li><p>Back to your command line, type <code>git remote add origin https://github.com/yourGithubUsername/example-collaborative-writing.git</code> <code>git add .</code>, <code>git commit -m "first commit"</code>, <code>git branch -M main</code>, <code>git push -u origin main</code>. These steps are only needed for the creation of a new repository, then things will be much simpler. Refresh the web page of the newly create Github repository. You should see your <em>example.md</em> file appearing!</p></li>
+<li><p>Join the <a href="https://github.com/cophyteam">cophyteam</a> organisation on Github. If you have not already been added, please share your Github account in the dedicated channel on Cophy Mattermost (i.e.&nbsp;⚒️ Git - Github).</p></li>
+<li><p>Still on Mattermost, ask Mathilde or Romain to add you as a collaborator to the <a href="https://github.com/cophyteam/project-template">project-template</a> repository.</p></li>
+<li><p>Log into Github and make sure your command line is connected to (see the <a href=".\help_github.html">Github help</a> if needed)</p></li>
+<li><p>Clone the <a href="https://github.com/cophyteam/project-template">project-template</a> repository.</p></li>
+<li><p>Make the change you want to do in the <code>website</code> folder.</p></li>
 </ol>
-<p>Now, each time that you’ll want to start working on the file(s) contained in the folder/repository, you’ll have to type <code>git pull</code> in the command line (make sure that our command line points to the correct folder, if not, <code>cd</code> to it), make your modification and then type: <code>git add .</code>, <code>git commit -m "any message"</code>, <code>git push</code> to upload your changes. You may even speed up this process further by using <a href="#speed-up-the-saving-process-with-git">this trick</a>.</p>
-<p>This tutorial may be extended to cover other important aspects of Git. The two most important concepts are “branching” (<a href="https://www.atlassian.com/git/tutorials/using-branches">see here</a>) and “merging” (<a href="https://www.atlassian.com/git/tutorials/using-branches/git-merge">see here</a>). A final one is “conflict management” (<a href="https://www.atlassian.com/git/tutorials/using-branches/merge-conflicts">see here</a>), which is relatively easy to deal with in VScode.</p>
-</section>
-<section id="if-you-dont-have-adminsudo-rights-e.g.-on-the-cluster" class="level3">
-<h3 class="anchored" data-anchor-id="if-you-dont-have-adminsudo-rights-e.g.-on-the-cluster">If you don’t have admin/sudo rights (e.g.&nbsp;on the cluster)</h3>
-<p>In this case, you can still connect your command line to your Github. The following is a simplified version of the information provided by <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Github</a>.</p>
-<ol type="1">
-<li><p>If you don’t have Github, create an account.</p></li>
-<li><p>In the command line of your computer, type <code>ssh-keygen -t ed25519 -C "your_email@example.com"</code> and indicate a passphrase (can be simple but not empty). This will create a new SSH key. Replace <code>your_email@example.com</code> by the email address you’ve used when creating your github account (it should work with other valid addresses too).</p></li>
-<li><p>Then, add the SSH key to your ssh client by typing: <code>ssh-add ~/.ssh/id_ed25519</code> (id_ed25519 is a default name: if you specified a name for your key, adjust accordingly).</p></li>
-<li><p>Still in the command line, type <code>cat ~/.ssh/id_ed25519.pub</code> (again, adjust name if necessary) and copy paste what comes out.</p></li>
-<li><p>Finally, login into your Github account, go to the following address <code>https://github.com/settings/profile</code>and paste what you got from previous step (it should start with ‘ssh-rsa’ and finish with the email address you’ve provided at step 2).</p></li>
-<li><p>That’s it. Now each time you need to connect to Github from your command line, just type <code>ssh -T git@github.com</code>. You’ll be asked the passphrase of your SSH key (as defined at step 2).</p></li>
+<div class="alert alert-dismissible alert-warning">
+<p>Please only edit the .qmd files within the <code>website</code> folder and the website-&gt;navbar area of the file .website/_quarto.yml (only needed if you want to add a new .qmd web page). In principle, you should not need to do other changes. You may play with the .scss file if you know what you are doing.</p>
+</div>
+<ol start="6" type="1">
+<li>Add, commit and push to the main branch. This should automatically trigger and update of the <a href="https://cophyteam.github.io/project-template">website</a> after a few minutes (you can check the deployment process <a href="https://github.com/cophyteam/project-template/actions">here</a>)</li>
 </ol>
+<p>Simple, isn’t it? ::bulb::</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
