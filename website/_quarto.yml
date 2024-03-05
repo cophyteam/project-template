@@ -23,6 +23,8 @@ website:
             file: help_quartonosudo.qmd
           - text: "BetterBibTex and Zotero"
             file: help_zotero.qmd
+          - text: "Edit this website"
+            file: "edit_this_website.qmd"
   
     right:
       - text: "About"
