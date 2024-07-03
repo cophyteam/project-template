@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Cophy Project - COPHY Project</title>
+<title>Cophy Project - Using Interactive Jupyter over SSH</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,6 +33,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
@@ -127,7 +128,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./about.html" aria-current="page"> 
+    <a class="nav-link" href="./about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -144,55 +145,134 @@ ul.task-list li input[type="checkbox"] {
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
+   
   <ul>
-  <li><a href="#idea" id="toc-idea" class="nav-link active" data-scroll-target="#idea">Idea</a></li>
-  <li><a href="#dissociating-writing-from-rendering-content" id="toc-dissociating-writing-from-rendering-content" class="nav-link" data-scroll-target="#dissociating-writing-from-rendering-content">Dissociating writing from rendering content</a></li>
-  <li><a href="#how-to-contribute" id="toc-how-to-contribute" class="nav-link" data-scroll-target="#how-to-contribute">How to contribute</a></li>
+  <li><a href="#extend-your-.bashrc-file" id="toc-extend-your-.bashrc-file" class="nav-link active" data-scroll-target="#extend-your-.bashrc-file">Extend your .bashrc file</a></li>
+  <li><a href="#launch-the-jupyter-session" id="toc-launch-the-jupyter-session" class="nav-link" data-scroll-target="#launch-the-jupyter-session">Launch the Jupyter session</a></li>
+  <li><a href="#set-up-the-ssh-tunnel" id="toc-set-up-the-ssh-tunnel" class="nav-link" data-scroll-target="#set-up-the-ssh-tunnel">Set up the SSH tunnel</a>
+  <ul class="collapse">
+  <li><a href="#windows" id="toc-windows" class="nav-link" data-scroll-target="#windows">Windows</a></li>
+  <li><a href="#windows-1" id="toc-windows-1" class="nav-link" data-scroll-target="#windows-1">Windows</a></li>
+  </ul></li>
+  <li><a href="#credits" id="toc-credits" class="nav-link" data-scroll-target="#credits">Credits</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<div class="quarto-about-jolla">
-  <img src="img/neuron.PNG" class="about-image
-  round " style="height: 15em; width: 15em;">
- <header id="title-block-header" class="quarto-title-block default">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">COPHY Project</h1>
+<h1 class="title">Using Interactive Jupyter over SSH</h1>
 </div>
+
+
+
 <div class="quarto-title-meta">
+
+    
+  
+    
   </div>
-</header><main class="content" id="quarto-document-content">
-
-<p>This website provides information about the template used for new scientific projects in the COPHY team. Like the template itself, the website may change and grow over time.</p>
-<section id="idea" class="level2">
-<h2 data-anchor-id="idea">Idea</h2>
-<p>All scientific project share similar components and they can therefore be integrated within a standard template, provided that the template is flexible enough. Templating does not only facilitate collaborative open science, it can also greatly accelerate the overall scientific process, thanks to a myriad of excellent tools such as Git, Quarto, Jupyter, etc.</p>
-</section>
-<section id="dissociating-writing-from-rendering-content" class="level2">
-<h2 data-anchor-id="dissociating-writing-from-rendering-content">Dissociating writing from rendering content</h2>
-<p>Academics spend a lot of their time writing papers, proposals, reports and other documents. Many are happy with traditional workflows combining a commercial word processors (e.g.&nbsp;Word) with a bibliography software such as Zotero or Mendeley. But academic writing is often collaborative and a lot of researchers actually need to use Google Docs (with some plugins) to do so. The problem is that Google Docs offer little guarantees when it comes to privacy, and it is rather limited when it comes to templating, writing equations or simply using it offline. Moreover, Google Docs still constitute one more interface in the daily life of academics (and not the best). By reading step by step the documentation of this website, you may set up an alternative writing workflow using Markdown.</p>
-<p>Habits are strong and starting to use Markdown entails a little switch cost, but it should be largely compensated by all the benefits of using it in the context of the proposed template. Check the documentation of this website to know more.</p>
-</section>
-<section id="how-to-contribute" class="level2">
-<h2 data-anchor-id="how-to-contribute">How to contribute</h2>
-<p>To contribute to the development and conception of the template, you can write to <a href="mailto:romain.ligneul@inserm.fr">romain.ligneul@inserm.fr</a>. You’ll need a <a href="github.com">Github account</a>. You will also have to join the <a href="https://github.com/cophyteam/">Cophy Team organization</a>.</p>
+  
 
 
+</header>
+
+
+<p>Visual Code over SSH is great but it is limited in its ability to run interactive Jupyter notebooks unless X11 forwarding is properly configured. Another way to go is to run a persistent Jupyter lab session on your remote SSH server and forward it through a tunnel.</p>
+<section id="extend-your-.bashrc-file" class="level2">
+<h2 class="anchored" data-anchor-id="extend-your-.bashrc-file">Extend your .bashrc file</h2>
+<p>To do so, we need to edit our .bashrc file (in /home/username/) and add the following lines</p>
+<pre class="{bash}"><code># &gt;&gt;&gt; Jupyterlab Remote &gt;&gt;&gt;
+function jlremote {
+    echo $(hostname) &gt; ~/.jupyternode.txt
+    cd /crnldata/cophy/
+    XDG_RUNTIME_DIR= jupyter lab --no-browser --port=9753 --ip=$(hostname)
+}
+# &lt;&lt;&lt; Jupyterlab end config &lt;&lt;&lt;</code></pre>
+<p>Note that the –port variable can be changed to your preference.</p>
+<p>Thanks to this piece of code, each time a terminal will open, the function jlremote will be added to the path.</p>
 </section>
-</main> 
-  <hr class="about-sep">
-   <div class="about-links">
-  <a href="https://github.com/romainligneul/cophy-project" class="about-link" rel="" target="">
-    <i class="bi bi-github"></i>
-     <span class="about-link-text">Github</span>
-  </a>
-  <a href="https://cophyteam.wixsite.com/website-1" class="about-link" rel="" target="">
-    <i class="bi bi-cup-hot-fill"></i>
-     <span class="about-link-text">Cophy</span>
-  </a>
-</div>
-</div>
- <!-- /main -->
+<section id="launch-the-jupyter-session" class="level2">
+<h2 class="anchored" data-anchor-id="launch-the-jupyter-session">Launch the Jupyter session</h2>
+<p>Most remote linux servers will offer the opportunity to run tmux, that allows opening a persistent shell session.</p>
+<p>In your remote terminal, type <code>tmux</code>. The tmux session will open. That is where we wll run our Jupyter notebook.</p>
+<p>Then, type <code>srun --mem=4G --pty bash</code>. This will associate your tmux session with a compute node on the remote server. You can adjust the memory you need for your notebooks.</p>
+<p>Then, type <code>jlremote</code>. This will launch your Jupyter lab session. It might take a bit of time before displaying a message like this one</p>
+<pre class="{bash}"><code>    Copy/paste this URL into your browser when you connect for the first time,
+    to login with a token:
+        http://localhost:8888/?token=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+</code></pre>
+<p>Copy the the shown URL and paste it somewhere (e.g.&nbsp;notepad)</p>
+</section>
+<section id="set-up-the-ssh-tunnel" class="level2">
+<h2 class="anchored" data-anchor-id="set-up-the-ssh-tunnel">Set up the SSH tunnel</h2>
+<section id="windows" class="level3">
+<h3 class="anchored" data-anchor-id="windows">Windows</h3>
+<p>On your local Windows compute, create a .bat file</p>
+<pre class="{bat}"><code>@echo off
+setlocal
+:: the port you've chosen in the function jlremote 
+set port=9753
+:: your username on the remote server
+set remote_username=firstname.lastname
+:: your machine IP
+set remote_hostname=10.69.168.62 
+
+for /f "tokens=* usebackq" %%i in (`powershell -command "ssh %remote_username%@%remote_hostname% 'tail -1 ~/.jupyternode.txt'"`) do set node=%%i
+
+:: Read the node from the temporary file
+set /p node=&lt;node.txt
+
+:: Delete the temporary file
+del node.txt
+
+set url=http://localhost:%port%
+
+:: Construct and run the SSH command
+set cmd=ssh -CNL 8888:%node%:%port% %remote_username%@%remote_hostname%
+echo Running '%cmd%'
+%cmd%
+
+endlocal</code></pre>
+<p>Run (or double click on) the .bat file.</p>
+<p>You should be able to use your notebook by using the address provided earlier.</p>
+<p><code>http://localhost:8888/?token=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</code></p>
+<p>You may also just use <code>http://localhost:8888/</code> and add the token manually.</p>
+<p>You may set a simple password to access the notebook without the token in the future.</p>
+</section>
+<section id="windows-1" class="level3">
+<h3 class="anchored" data-anchor-id="windows-1">Windows</h3>
+<p>On your local Windows compute, create a .bat file</p>
+<pre class="{bash}"><code>function jllocal {
+    port=5678
+    remote_username=USERNAME
+    remote_hostname=HOSTNAME
+    node=$(ssh $remote_username@$remote_hostname 'tail -1 ~/.jupyternode.txt')
+    url="http://localhost:$port"
+    echo "Opening $url"
+    open "$url"
+    cmd="ssh -CNL "8888":"$node":"$port" $remote_username@$remote_hostname"
+    echo "Running '$cmd'"
+    eval "$cmd"
+}</code></pre>
+<p>Run (or double click on) the .bat file.</p>
+<p>You should be able to use your notebook by using the address provided earlier.</p>
+<p><code>http://localhost:8888/?token=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</code></p>
+<p>You may also just use <code>http://localhost:8888/</code> and add the token manually.</p>
+<p>You may set a simple password to access the notebook without the token in the future.</p>
+</section>
+</section>
+<section id="credits" class="level2">
+<h2 class="anchored" data-anchor-id="credits">Credits</h2>
+<p>This tutorial was largely inspired by this one:</p>
+<p>https://benjlindsay.com/posts/running-jupyter-lab-remotely/</p>
+
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -213,6 +293,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
