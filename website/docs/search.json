@@ -21,74 +21,46 @@
     "text": "Citations\nThe first thing we want to learn is to cite a paper. There are many ways to do so, but you’ll probably often use the amazing tool provided by Quarto.\nTo activate Quarto’s citation picker, just type Ctrl+Shift+F8. Otherwise, if you are in the Visual Mode, you can use the menu: Insert –&gt; Citation.\nOnce you’ve cited an item, it will appear as an unformatted citation key [@WATSON1953] in the file. Don’t worry, the principle of Markdown is to decouple writing from rendering text. This is why is it so fast and fluid, but also why you may see peculiar markup, even when using the Visual Mode.\nIn principle, Quarto automatically detects your local Zotero database and gives your the possibility of picking your own articles. However, if you are using Quarto through the VScodeSSH methods, it won’t find your Zotero that runs on a different system (your local computer). It is unlikely that you’ll be often using Quarto in this way to write because this connection mode is mostly useful whenever you want to run demanding computations on the server using the VScodeSSH-Jupyter approach. There are ways to go around this limitations, but it is a bit too advanced for now."
   },
   {
-    "objectID": "help_ssh.html",
-    "href": "help_ssh.html",
-    "title": "Connecting to the CRNL server over SSH in Visual Code",
+    "objectID": "help_ssh_jupyter.html",
+    "href": "help_ssh_jupyter.html",
+    "title": "Using Interactive Jupyter over SSH",
     "section": "",
-    "text": "Visual Code has a great Remote SSH extension that can be used to connect remotely to the CRNL server, without having to constantly enter your password. Except for using Matlab (it may change soon), working on the server from VScode has only advantages, starting with speed (as compared to laggy VNC connections). Since the connection process can be a bit tedious, here are the steps to follow. You have only to follow them once. It is assumed that you use Windows, but it should be similar on other platforms."
+    "text": "Visual Code over SSH is great but it is limited in its ability to run interactive Jupyter notebooks unless X11 forwarding is properly configured. Another way to go is to run a persistent Jupyter lab session on your remote SSH server and forward it through a tunnel."
   },
   {
-    "objectID": "help_ssh.html#set-up-the-vpn-of-inserm-if-you-are-outside-the-crnl-premises",
-    "href": "help_ssh.html#set-up-the-vpn-of-inserm-if-you-are-outside-the-crnl-premises",
-    "title": "Connecting to the CRNL server over SSH in Visual Code",
-    "section": "Set up the VPN of INSERM (if you are outside the CRNL premises)",
-    "text": "Set up the VPN of INSERM (if you are outside the CRNL premises)\nTo access the CRNL servers from outside, following this tutorial.\nhttps://wiki.crnl.fr/doku.php?id=wiki:informatique:services:vpn\nYou need your CRNL identifiers to access this page. Essentially, besides installing the software, you have to fill the PDF “fiche” (here) and send it to pe.aguera@inserm.fr. Then, it will be a matter of days before you can access the CRNL infrastructure remotely. You’ll be noticed by email.\nIf you don’t have an INSERM email, you can ask one if you work at CRNL (even if you are affiliated to CNRS or UCBL)."
+    "objectID": "help_ssh_jupyter.html#extend-your-.bashrc-file",
+    "href": "help_ssh_jupyter.html#extend-your-.bashrc-file",
+    "title": "Using Interactive Jupyter over SSH",
+    "section": "Extend your .bashrc file",
+    "text": "Extend your .bashrc file\nTo do so, we need to edit our .bashrc file (in /home/username/) and add the following lines\n# &gt;&gt;&gt; Jupyterlab Remote &gt;&gt;&gt;\nfunction jlremote {\n    echo $(hostname) &gt; ~/.jupyternode.txt\n    cd /crnldata/cophy/\n    XDG_RUNTIME_DIR= jupyter lab --no-browser --port=9753 --ip=$(hostname)\n}\n# &lt;&lt;&lt; Jupyterlab end config &lt;&lt;&lt;\nNote that the –port variable can be changed to your preference.\nThanks to this piece of code, each time a terminal will open, the function jlremote will be added to the path."
   },
   {
-    "objectID": "help_ssh.html#connect-with-username-and-password",
-    "href": "help_ssh.html#connect-with-username-and-password",
-    "title": "Connecting to the CRNL server over SSH in Visual Code",
-    "section": "Connect with username and password",
-    "text": "Connect with username and password\nIn Visual Code, first click on the bottom left icon of the Remote SSH extension.\n\n\nType, connect to host and enter: ssh yourusername@10.69.168.62\nThen, you’ll be asked to enter your password.\nOpen your /home/yourusername folder (it will ask your password a 2nd time)\nCreate a .ssh folder (/home/yourusername/.ssh) and inside that folder, create a file named authorized_keys (without any extension)\nOpen this file\n\nLeave open this Visual Code session that we will call the server session, to open and create the pair of keys."
+    "objectID": "help_ssh_jupyter.html#launch-the-jupyter-session",
+    "href": "help_ssh_jupyter.html#launch-the-jupyter-session",
+    "title": "Using Interactive Jupyter over SSH",
+    "section": "Launch the Jupyter session",
+    "text": "Launch the Jupyter session\nMost remote linux servers will offer the opportunity to run tmux, that allows opening a persistent shell session.\nIn your remote terminal, type tmux. The tmux session will open. That is where we wll run our Jupyter notebook.\nThen, type srun --mem=4G --pty bash. This will associate your tmux session with a compute node on the remote server. You can adjust the memory you need for your notebooks.\nThen, type jlremote. This will launch your Jupyter lab session. It might take a bit of time before displaying a message like this one\n    Copy/paste this URL into your browser when you connect for the first time,\n    to login with a token:\n        http://localhost:8888/?token=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\nCopy the the shown URL and paste it somewhere (e.g. notepad)"
   },
   {
-    "objectID": "help_ssh.html#create-a-pair-of-keys-and-configure-them",
-    "href": "help_ssh.html#create-a-pair-of-keys-and-configure-them",
-    "title": "Connecting to the CRNL server over SSH in Visual Code",
-    "section": "Create a pair of keys and configure them",
-    "text": "Create a pair of keys and configure them\n\nOpen VS code a second time on your local computer. We will call this one the local session\nOpen a terminal in this local session.\ncd to the folder of your choice (that’s where the SSH keys will be stored, so there should be no space in the path)\nType ssh-keygen -t ed25519 and chose whatever name you like for the key. You don’t have to set a password. If ssh-keygen is throwing an error, see here.\nTwo files are created, open the file ending with a .pub extension using VS code or any text editor.\nCopy its content and paste it in the authorized_keys file that should be opened in your VS code server session (the one we used first)\nNow, return to your local session and click again on the blue icon of the Remote SSH extension (bottom left).\nClick Connect to host\nClick Configure SSH Hosts\nClick on the line displaying C:\\Users\\UserName\\.ssh\\config and make sure it looks as follow:\n\nHost 10.69.168.62\n  HostName 10.69.168.62\n  ForwardX11 yes\n  User firstname.lastname\n  IdentityFile C:\\pathofyourkeyfile\\yourkeyfile\nOf course, change the User and IdentityFile fields for your own username and path to the key (do not include the .pub extension)\nThat’s it. In principle, the next time you click on Connect to host in Visual Code, you won’t have to enter any password."
+    "objectID": "help_ssh_jupyter.html#set-up-the-ssh-tunnel",
+    "href": "help_ssh_jupyter.html#set-up-the-ssh-tunnel",
+    "title": "Using Interactive Jupyter over SSH",
+    "section": "Set up the SSH tunnel",
+    "text": "Set up the SSH tunnel\n\nWindows\nOn your local Windows compute, create a .bat file\n@echo off\nsetlocal\n:: the port you've chosen in the function jlremote \nset port=9753\n:: your username on the remote server\nset remote_username=firstname.lastname\n:: your machine IP\nset remote_hostname=10.69.168.62 \n\nfor /f \"tokens=* usebackq\" %%i in (`powershell -command \"ssh %remote_username%@%remote_hostname% 'tail -1 ~/.jupyternode.txt'\"`) do set node=%%i\n\n:: Read the node from the temporary file\nset /p node=&lt;node.txt\n\n:: Delete the temporary file\ndel node.txt\n\nset url=http://localhost:%port%\n\n:: Construct and run the SSH command\nset cmd=ssh -CNL 8888:%node%:%port% %remote_username%@%remote_hostname%\necho Running '%cmd%'\n%cmd%\n\nendlocal\nRun (or double click on) the .bat file.\nYou should be able to use your notebook by using the address provided earlier.\nhttp://localhost:8888/?token=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nYou may also just use http://localhost:8888/ and add the token manually.\nYou may set a simple password to access the notebook without the token in the future.\n\n\nWindows\nOn your local Windows compute, create a .bat file\nfunction jllocal {\n    port=5678\n    remote_username=USERNAME\n    remote_hostname=HOSTNAME\n    node=$(ssh $remote_username@$remote_hostname 'tail -1 ~/.jupyternode.txt')\n    url=\"http://localhost:$port\"\n    echo \"Opening $url\"\n    open \"$url\"\n    cmd=\"ssh -CNL \"8888\":\"$node\":\"$port\" $remote_username@$remote_hostname\"\n    echo \"Running '$cmd'\"\n    eval \"$cmd\"\n}\nRun (or double click on) the .bat file.\nYou should be able to use your notebook by using the address provided earlier.\nhttp://localhost:8888/?token=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nYou may also just use http://localhost:8888/ and add the token manually.\nYou may set a simple password to access the notebook without the token in the future."
   },
   {
-    "objectID": "help_github.html",
-    "href": "help_github.html",
-    "title": "Quick tutorial for Git/Github",
+    "objectID": "help_ssh_jupyter.html#credits",
+    "href": "help_ssh_jupyter.html#credits",
+    "title": "Using Interactive Jupyter over SSH",
+    "section": "Credits",
+    "text": "Credits\nThis tutorial was largely inspired by this one:\nhttps://benjlindsay.com/posts/running-jupyter-lab-remotely/"
+  },
+  {
+    "objectID": "help_quartonosudo.html",
+    "href": "help_quartonosudo.html",
+    "title": "Quarto without Sudo rights on Linux",
     "section": "",
-    "text": "If you only plan to clone public repositories, you can probably just use git clone https:// or simply download and unzip the repository of interest.\nHowever, you will need to connect your command line to your Github account in the following scenarios:\n\nto clone private repositories that you own or one which you have been added as a collaborator.\nto perform any write operation in the repository (e.g. push, pull, merge, branch, etc.)\n\n\nIf you have admin/sudo rights\n\nIf you don’t have Github, create an account.\nInstall the Github CLI utility that will allow you to connect your command line to your Github repository.\nRestart your terminal (or Visual Code), reopen it, and type gh auth login. Choose Github.com, HTTPS, Login with a web browser (or use an auth token if you prefer)\nCD to the directory where your example.md file is located and type git init in the command line. This preconfigures the folder as a Git repository.\nIn Github, create a new repository. For example, name it “example-collaborative-writing”. If you create a public repository, everyone on the web will be able to see the repository and its content. If you create a private repository, only the Github contact that you will manually add to the repository will be able to see it and its content. Most often, you’ll want to create private repositories to work with specific colleagues.\nBack to your command line, type git remote add origin https://github.com/yourGithubUsername/example-collaborative-writing.git git add ., git commit -m \"first commit\", git branch -M main, git push -u origin main. These steps are only needed for the creation of a new repository, then things will be much simpler. Refresh the web page of the newly create Github repository. You should see your example.md file appearing!\n\nNow, each time that you’ll want to start working on the file(s) contained in the folder/repository, you’ll have to type git pull in the command line (make sure that our command line points to the correct folder, if not, cd to it), make your modification and then type: git add ., git commit -m \"any message\", git push to upload your changes. You may even speed up this process further by using this trick.\nThis tutorial may be extended to cover other important aspects of Git. The two most important concepts are “branching” (see here) and “merging” (see here). A final one is “conflict management” (see here), which is relatively easy to deal with in VScode.\n\n\nIf you don’t have admin/sudo rights (e.g. on the cluster)\nIn this case, you can still connect your command line to your Github. The following is a simplified version of the information provided by Github.\n\nIf you don’t have Github, create an account.\nIn the command line of your computer, type ssh-keygen -t ed25519 -C \"your_email@example.com\" and indicate a passphrase (can be simple but not empty). This will create a new SSH key. Replace your_email@example.com by the email address you’ve used when creating your github account (it should work with other valid addresses too).\nThen, add the SSH key to your ssh client by typing: ssh-add ~/.ssh/id_ed25519 (id_ed25519 is a default name: if you specified a name for your key, adjust accordingly).\nStill in the command line, type cat ~/.ssh/id_ed25519.pub (again, adjust name if necessary) and copy paste what comes out.\nFinally, login into your Github account, go to the following address https://github.com/settings/profileand paste what you got from previous step (it should start with ‘ssh-rsa’ and finish with the email address you’ve provided at step 2).\nThat’s it. Now each time you need to connect to Github from your command line, just type ssh -T git@github.com. You’ll be asked the passphrase of your SSH key (as defined at step 2)."
-  },
-  {
-    "objectID": "edit_this_website.html",
-    "href": "edit_this_website.html",
-    "title": "How to edit this website",
-    "section": "",
-    "text": "To modify this website you’ll have to:\n\nJoin the cophyteam organisation on Github. If you have not already been added, please share your Github account in the dedicated channel on Cophy Mattermost (i.e. ⚒️ Git - Github).\nStill on Mattermost, ask Mathilde or Romain to add you as a collaborator to the project-template repository.\nLog into Github and make sure your command line is connected to (see the Github help if needed)\nClone the project-template repository.\nMake the change you want to do in the website folder.\n\n\nPlease only edit the .qmd files within the website folder and the website-&gt;navbar area of the file .website/_quarto.yml (only needed if you want to add a new .qmd web page). In principle, you should not need to do other changes. You may play with the .scss file if you know what you are doing.\n\n\nAdd, commit and push to the main branch. This should automatically trigger and update of the website after a few minutes (you can check the deployment process here)\n\nSimple, isn’t it? ::bulb::"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "COPHY Project",
-    "section": "",
-    "text": "This website provides information about the template used for new scientific projects in the COPHY team. Like the template itself, the website may change and grow over time."
-  },
-  {
-    "objectID": "about.html#idea",
-    "href": "about.html#idea",
-    "title": "COPHY Project",
-    "section": "Idea",
-    "text": "Idea\nAll scientific project share similar components and they can therefore be integrated within a standard template, provided that the template is flexible enough. Templating does not only facilitate collaborative open science, it can also greatly accelerate the overall scientific process, thanks to a myriad of excellent tools such as Git, Quarto, Jupyter, etc."
-  },
-  {
-    "objectID": "about.html#dissociating-writing-from-rendering-content",
-    "href": "about.html#dissociating-writing-from-rendering-content",
-    "title": "COPHY Project",
-    "section": "Dissociating writing from rendering content",
-    "text": "Dissociating writing from rendering content\nAcademics spend a lot of their time writing papers, proposals, reports and other documents. Many are happy with traditional workflows combining a commercial word processors (e.g. Word) with a bibliography software such as Zotero or Mendeley. But academic writing is often collaborative and a lot of researchers actually need to use Google Docs (with some plugins) to do so. The problem is that Google Docs offer little guarantees when it comes to privacy, and it is rather limited when it comes to templating, writing equations or simply using it offline. Moreover, Google Docs still constitute one more interface in the daily life of academics (and not the best). By reading step by step the documentation of this website, you may set up an alternative writing workflow using Markdown.\nHabits are strong and starting to use Markdown entails a little switch cost, but it should be largely compensated by all the benefits of using it in the context of the proposed template. Check the documentation of this website to know more."
-  },
-  {
-    "objectID": "about.html#how-to-contribute",
-    "href": "about.html#how-to-contribute",
-    "title": "COPHY Project",
-    "section": "How to contribute",
-    "text": "How to contribute\nTo contribute to the development and conception of the template, you can write to romain.ligneul@inserm.fr. You’ll need a Github account. You will also have to join the Cophy Team organization."
+    "text": "Here are the steps to follow. Open a command line and type:\n`wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.4.504/quarto-1.4.504-linux-amd64.tar.gz`\n`mkdir ~/opt`\n`tar -C ~/opt -xvzf quarto-1.4.504-linux-amd64.tar.gz`\n`mkdir ~/bin`\n`ln -s ~/opt/quarto-1.4.504/bin/quarto ~/bin/quarto`\nIf you have an error at this step because the symbolic link exists already, type: rm ~/bin/quarto\n`( echo \"\"; echo 'export PATH=$PATH:~/bin\\n' ; echo \"\" ) &gt;&gt; ~/.profile`\n`source ~/.profile`\nquarto check"
   },
   {
     "objectID": "getstarted.html",
@@ -119,11 +91,74 @@
     "text": "Bonus steps for VScode users\nOne strength of Visual Studio Code is its amazing ecosystem of extensions. Getting the right extensions can facilitate your life in many ways. Hereafter, a list of extensions you might want to install:\n\nConnect directly to any remote server: SSH extension\nReal-time collaboration tool (great to debug and even write together): LiveShare\nFacilitate the use and the understanding of Git: GitGraph\nPreview any website or HTML within VScode: VScode browser\nUse interactive Jupyter notebooks within VScode: Jupyter\nSimplifies working with Quarto: Quarto\nGet the help of GPT when coding: GenieAI\nMake almost any code look prettier: Prettier\nFacilitate the use of Python: Python\n\nThere are many more to explore (see File -&gt; Extensions)"
   },
   {
-    "objectID": "help_quartonosudo.html",
-    "href": "help_quartonosudo.html",
-    "title": "Quarto without Sudo rights on Linux",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "COPHY Project",
     "section": "",
-    "text": "Here are the steps to follow. Open a command line and type:\n`wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.4.504/quarto-1.4.504-linux-amd64.tar.gz`\n`mkdir ~/opt`\n`tar -C ~/opt -xvzf quarto-1.4.504-linux-amd64.tar.gz`\n`mkdir ~/bin`\n`ln -s ~/opt/quarto-1.4.504/bin/quarto ~/bin/quarto`\nIf you have an error at this step because the symbolic link exists already, type: rm ~/bin/quarto\n`( echo \"\"; echo 'export PATH=$PATH:~/bin\\n' ; echo \"\" ) &gt;&gt; ~/.profile`\n`source ~/.profile`\nquarto check"
+    "text": "This website provides information about the template used for new scientific projects in the COPHY team. Like the template itself, the website may change and grow over time."
+  },
+  {
+    "objectID": "about.html#idea",
+    "href": "about.html#idea",
+    "title": "COPHY Project",
+    "section": "Idea",
+    "text": "Idea\nAll scientific project share similar components and they can therefore be integrated within a standard template, provided that the template is flexible enough. Templating does not only facilitate collaborative open science, it can also greatly accelerate the overall scientific process, thanks to a myriad of excellent tools such as Git, Quarto, Jupyter, etc."
+  },
+  {
+    "objectID": "about.html#dissociating-writing-from-rendering-content",
+    "href": "about.html#dissociating-writing-from-rendering-content",
+    "title": "COPHY Project",
+    "section": "Dissociating writing from rendering content",
+    "text": "Dissociating writing from rendering content\nAcademics spend a lot of their time writing papers, proposals, reports and other documents. Many are happy with traditional workflows combining a commercial word processors (e.g. Word) with a bibliography software such as Zotero or Mendeley. But academic writing is often collaborative and a lot of researchers actually need to use Google Docs (with some plugins) to do so. The problem is that Google Docs offer little guarantees when it comes to privacy, and it is rather limited when it comes to templating, writing equations or simply using it offline. Moreover, Google Docs still constitute one more interface in the daily life of academics (and not the best). By reading step by step the documentation of this website, you may set up an alternative writing workflow using Markdown.\nHabits are strong and starting to use Markdown entails a little switch cost, but it should be largely compensated by all the benefits of using it in the context of the proposed template. Check the documentation of this website to know more."
+  },
+  {
+    "objectID": "about.html#how-to-contribute",
+    "href": "about.html#how-to-contribute",
+    "title": "COPHY Project",
+    "section": "How to contribute",
+    "text": "How to contribute\nTo contribute to the development and conception of the template, you can write to romain.ligneul@inserm.fr. You’ll need a Github account. You will also have to join the Cophy Team organization."
+  },
+  {
+    "objectID": "edit_this_website.html",
+    "href": "edit_this_website.html",
+    "title": "How to edit this website",
+    "section": "",
+    "text": "To modify this website you’ll have to:\n\nJoin the cophyteam organisation on Github. If you have not already been added, please share your Github account in the dedicated channel on Cophy Mattermost (i.e. ⚒️ Git - Github).\nStill on Mattermost, ask Mathilde or Romain to add you as a collaborator to the project-template repository.\nLog into Github and make sure your command line is connected to (see the Github help if needed)\nClone the project-template repository.\nMake the change you want to do in the website folder.\n\n\nPlease only edit the .qmd files within the “website” folder. If you want to add a new .qmd web page, then you’ll have to update the file .website/_quarto.yml (website: navbar: zone). In principle, you should not need to changes other file. You may play with the .scss file if you know what you are doing.\n\n\nAdd, commit and push to the main branch.\n\n7 Type cd website and quarto publish gh-pages. This should automatically trigger and update of the website after a few minutes (you can check the deployment process here)\nSimple, isn’t it?"
+  },
+  {
+    "objectID": "help_github.html",
+    "href": "help_github.html",
+    "title": "Quick tutorial for Git/Github",
+    "section": "",
+    "text": "If you only plan to clone public repositories, you can probably just use git clone https:// or simply download and unzip the repository of interest.\nHowever, you will need to connect your command line to your Github account in the following scenarios:\n\nto clone private repositories that you own or one which you have been added as a collaborator.\nto perform any write operation in the repository (e.g. push, pull, merge, branch, etc.)\n\n\nIf you have admin/sudo rights\n\nIf you don’t have Github, create an account.\nInstall the Github CLI utility that will allow you to connect your command line to your Github repository.\nRestart your terminal (or Visual Code), reopen it, and type gh auth login. Choose Github.com, HTTPS, Login with a web browser (or use an auth token if you prefer)\nCD to the directory where your example.md file is located and type git init in the command line. This preconfigures the folder as a Git repository.\nIn Github, create a new repository. For example, name it “example-collaborative-writing”. If you create a public repository, everyone on the web will be able to see the repository and its content. If you create a private repository, only the Github contact that you will manually add to the repository will be able to see it and its content. Most often, you’ll want to create private repositories to work with specific colleagues.\nBack to your command line, type git remote add origin https://github.com/yourGithubUsername/example-collaborative-writing.git git add ., git commit -m \"first commit\", git branch -M main, git push -u origin main. These steps are only needed for the creation of a new repository, then things will be much simpler. Refresh the web page of the newly create Github repository. You should see your example.md file appearing!\n\nNow, each time that you’ll want to start working on the file(s) contained in the folder/repository, you’ll have to type git pull in the command line (make sure that our command line points to the correct folder, if not, cd to it), make your modification and then type: git add ., git commit -m \"any message\", git push to upload your changes. You may even speed up this process further by using this trick.\nThis tutorial may be extended to cover other important aspects of Git. The two most important concepts are “branching” (see here) and “merging” (see here). A final one is “conflict management” (see here), which is relatively easy to deal with in VScode.\n\n\nIf you don’t have admin/sudo rights (e.g. on the cluster)\nIn this case, you can still connect your command line to your Github. The following is a simplified version of the information provided by Github.\n\nIf you don’t have Github, create an account.\nIn the command line of your computer, type ssh-keygen -t ed25519 -C \"your_email@example.com\" and indicate a passphrase (can be simple but not empty). This will create a new SSH key. Replace your_email@example.com by the email address you’ve used when creating your github account (it should work with other valid addresses too).\nThen, add the SSH key to your ssh client by typing: ssh-add ~/.ssh/id_ed25519 (id_ed25519 is a default name: if you specified a name for your key, adjust accordingly).\nStill in the command line, type cat ~/.ssh/id_ed25519.pub (again, adjust name if necessary) and copy paste what comes out.\nFinally, login into your Github account, go to the following address https://github.com/settings/profileand paste what you got from previous step (it should start with ‘ssh-rsa’ and finish with the email address you’ve provided at step 2).\nThat’s it. Now each time you need to connect to Github from your command line, just type ssh -T git@github.com. You’ll be asked the passphrase of your SSH key (as defined at step 2)."
+  },
+  {
+    "objectID": "help_ssh.html",
+    "href": "help_ssh.html",
+    "title": "Connecting to the CRNL server over SSH in Visual Code",
+    "section": "",
+    "text": "Visual Code has a great Remote SSH extension that can be used to connect remotely to the CRNL server, without having to constantly enter your password. Except for using Matlab (it may change soon), working on the server from VScode has only advantages, starting with speed (as compared to laggy VNC connections). Since the connection process can be a bit tedious, here are the steps to follow. You have only to follow them once. It is assumed that you use Windows, but it should be similar on other platforms."
+  },
+  {
+    "objectID": "help_ssh.html#set-up-the-vpn-of-inserm-if-you-are-outside-the-crnl-premises",
+    "href": "help_ssh.html#set-up-the-vpn-of-inserm-if-you-are-outside-the-crnl-premises",
+    "title": "Connecting to the CRNL server over SSH in Visual Code",
+    "section": "Set up the VPN of INSERM (if you are outside the CRNL premises)",
+    "text": "Set up the VPN of INSERM (if you are outside the CRNL premises)\nTo access the CRNL servers from outside, following this tutorial.\nhttps://wiki.crnl.fr/doku.php?id=wiki:informatique:services:vpn\nYou need your CRNL identifiers to access this page. Essentially, besides installing the software, you have to fill the PDF “fiche” (here) and send it to pe.aguera@inserm.fr. Then, it will be a matter of days before you can access the CRNL infrastructure remotely. You’ll be noticed by email.\nIf you don’t have an INSERM email, you can ask one if you work at CRNL (even if you are affiliated to CNRS or UCBL)."
+  },
+  {
+    "objectID": "help_ssh.html#connect-with-username-and-password",
+    "href": "help_ssh.html#connect-with-username-and-password",
+    "title": "Connecting to the CRNL server over SSH in Visual Code",
+    "section": "Connect with username and password",
+    "text": "Connect with username and password\nIn Visual Code, first click on the bottom left icon of the Remote SSH extension.\n\n\nType, connect to host and enter: ssh yourusername@10.69.168.62\nThen, you’ll be asked to enter your password.\nOpen your /home/yourusername folder (it will ask your password a 2nd time)\nCreate a .ssh folder (/home/yourusername/.ssh) and inside that folder, create a file named authorized_keys (without any extension)\nOpen this file\n\nLeave open this Visual Code session that we will call the server session, to open and create the pair of keys."
+  },
+  {
+    "objectID": "help_ssh.html#create-a-pair-of-keys-and-configure-them",
+    "href": "help_ssh.html#create-a-pair-of-keys-and-configure-them",
+    "title": "Connecting to the CRNL server over SSH in Visual Code",
+    "section": "Create a pair of keys and configure them",
+    "text": "Create a pair of keys and configure them\n\nOpen VS code a second time on your local computer. We will call this one the local session\nOpen a terminal in this local session.\ncd to the folder of your choice (that’s where the SSH keys will be stored, so there should be no space in the path)\nType ssh-keygen -t ed25519 and chose whatever name you like for the key. You don’t have to set a password. If ssh-keygen is throwing an error, see here.\nTwo files are created, open the file ending with a .pub extension using VS code or any text editor.\nCopy its content and paste it in the authorized_keys file that should be opened in your VS code server session (the one we used first)\nNow, return to your local session and click again on the blue icon of the Remote SSH extension (bottom left).\nClick Connect to host\nClick Configure SSH Hosts\nClick on the line displaying C:\\Users\\UserName\\.ssh\\config and make sure it looks as follow:\n\nHost 10.69.168.62\n  HostName 10.69.168.62\n  ForwardX11 yes\n  User firstname.lastname\n  IdentityFile C:\\pathofyourkeyfile\\yourkeyfile\nOf course, change the User and IdentityFile fields for your own username and path to the key (do not include the .pub extension)\nThat’s it. In principle, the next time you click on Connect to host in Visual Code, you won’t have to enter any password."
   },
   {
     "objectID": "help_zotero.html",
