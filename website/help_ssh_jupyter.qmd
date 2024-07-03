@@ -3,7 +3,7 @@ title: Using Interactive Jupyter over SSH
 toc: true
 execute: 
   echo: true
-  freeze: true
+  freeze: false
 ---
 
 Visual Code over SSH is great but it is limited in its ability to run interactive Jupyter notebooks unless X11 forwarding is properly configured.
@@ -91,6 +91,7 @@ You may also just use `http://localhost:8888/` and add the token manually.
 
 You may set a simple password to access the notebook without the token in the future.
 
+
 ### Linux
 
 On your local Windows compute, create a .bat file
@@ -116,12 +117,13 @@ You should be able to use your notebook by using the address provided earlier.
 
 `http://localhost:8888/?token=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX`
 
-You may also just use `http://localhost:8888/` and add the token manually. 
+You may also just use `http://localhost:8888/` and add the token manually .
 
 You may set a simple password to access the notebook without the token in the future.
 
 
 ## Credits
+
 
 This tutorial was largely inspired by this one:
 
