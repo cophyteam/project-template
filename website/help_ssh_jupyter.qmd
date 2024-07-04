@@ -11,7 +11,7 @@ Another way to go is to run a persistent Jupyter lab session on your remote SSH 
 
 ## Extend your .bashrc file
 
-To do so, we need to edit our .bashrc file (in /home/username/) and add the following lines
+To do so, we need to edit our .bashrc file (in /home/username/.bashrc) and add the following lines at the end.
 
 ```{bash}
 # >>> Jupyterlab Remote >>>
@@ -45,7 +45,7 @@ Then, type `jlremote`. This will launch your Jupyter lab session. It might take 
 
 ```
 
-Copy the the shown URL and paste it somewhere (e.g. notepad)
+Copy the token value (after = sign) and keep it somewhere.
 
 ## Set up the SSH tunnel
 
@@ -68,14 +68,15 @@ for /f "tokens=* usebackq" %%i in (`powershell -command "ssh %remote_username%@%
 :: Read the node from the temporary file
 set /p node=<node.txt
 
-:: Delete the temporary file
-del node.txt
-
 set url=http://localhost:%port%
 
 :: Construct and run the SSH command
 set cmd=ssh -CNL 8888:%node%:%port% %remote_username%@%remote_hostname%
 echo Running '%cmd%'
+
+:: Delete the temporary file
+del node.txt
+
 %cmd%
 
 endlocal
