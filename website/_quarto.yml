@@ -16,13 +16,12 @@ website:
         - text: "Part 2"
           file: Tutorial_Cluster_Part2.qmd             
       - text: "Quarto tutorial"
-        file: tutorial.qmd
         menu:
         - text: "Why Quarto"
           file: tutorial.qmd
         - text: "Quarto Workflow"
           file: getstarted.qmd 
-        - text: "Quarto on the cluster (no sudo rights)"
+        - text: "Quarto on the cluster"
           file: help_quartonosudo.qmd
       - text: "Other tutorials"
         menu:
