@@ -103,10 +103,25 @@ ul.task-list li input[type="checkbox"] {
   </li>  
     </ul>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" href="./tutorial.html"> 
-<span class="menu-text">Quarto tutorial</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-quarto-tutorial" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Quarto tutorial</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-quarto-tutorial">    
+        <li>
+    <a class="dropdown-item" href="./tutorial.html">
+ <span class="dropdown-text">Why Quarto</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./getstarted.html">
+ <span class="dropdown-text">Quarto Workflow</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./help_quartonosudo.html">
+ <span class="dropdown-text">Quarto on the cluster</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-other-tutorials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Other tutorials</span>
@@ -381,7 +396,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/cophyteam\.github\.io\/project-template\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
