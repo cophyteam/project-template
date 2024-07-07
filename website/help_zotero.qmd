@@ -1,5 +1,6 @@
 ---
 title: Optimize Zotero for Markdown citations
+author: Romain Ligneul
 toc: true
 execute: 
   echo: true

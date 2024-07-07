@@ -1,5 +1,6 @@
 ---
 title: Connecting to the CRNL server over SSH in Visual Code
+author: Romain Ligneul
 toc: true
 execute: 
   echo: true

@@ -9,10 +9,21 @@ website:
   navbar:
     background: dark
     left:
-      - text: "Get started"
-        file: getstarted.qmd
-      - text: "Main tutorial"
-        file: tutorial.qmd        
+      - text: "Cluster tutorial"
+        menu:
+        - text: "Part 1"
+          file: Tutorial_Cluster_Part1.qmd
+        - text: "Part 2"
+          file: Tutorial_Cluster_Part2.qmd             
+      - text: "Quarto tutorial"
+        file: tutorial.qmd
+        menu:
+        - text: "Why Quarto"
+          file: tutorial.qmd
+        - text: "Quarto Workflow"
+          file: getstarted.qmd 
+        - text: "Quarto on the cluster (no sudo rights)"
+          file: help_quartonosudo.qmd
       - text: "Other tutorials"
         menu:
           - text: "Github"
@@ -21,8 +32,6 @@ website:
             file: help_ssh.qmd
           - text: "Interactive Jupyter over SSH"
             file: help_ssh_jupyter.qmd
-          - text: "Quarto without Sudo"
-            file: help_quartonosudo.qmd
           - text: "BetterBibTex and Zotero"
             file: help_zotero.qmd
           - text: "Edit this website"

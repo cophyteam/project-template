@@ -87,13 +87,24 @@ ul.task-list li input[type="checkbox"] {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="./getstarted.html"> 
-<span class="menu-text">Get started</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-cluster-tutorial" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Cluster tutorial</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-cluster-tutorial">    
+        <li>
+    <a class="dropdown-item" href="./Tutorial_Cluster_Part1.html">
+ <span class="dropdown-text">Part 1</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./Tutorial_Cluster_Part2.html">
+ <span class="dropdown-text">Part 2</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="./tutorial.html"> 
-<span class="menu-text">Main tutorial</span></a>
+<span class="menu-text">Quarto tutorial</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-other-tutorials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -111,10 +122,6 @@ ul.task-list li input[type="checkbox"] {
         <li>
     <a class="dropdown-item" href="./help_ssh_jupyter.html">
  <span class="dropdown-text">Interactive Jupyter over SSH</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./help_quartonosudo.html">
- <span class="dropdown-text">Quarto without Sudo</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./help_zotero.html">
@@ -175,14 +182,16 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Log into Github and make sure your command line is connected to (see the <a href=".\help_github.html">Github help</a> if needed)</p></li>
 <li><p>Clone the <a href="https://github.com/cophyteam/project-template">project-template</a> repository.</p></li>
 <li><p>Make the change you want to do in the <code>website</code> folder.</p></li>
+<li><p>Make your you’ve <code>cd</code> in the website-specific folder and type <code>quarto render</code></p></li>
 </ol>
 <div class="alert alert-dismissible alert-warning">
 <p>Please only edit the .qmd files within the “website” folder. If you want to add a new .qmd web page, then you’ll have to update the file .website/_quarto.yml (website: navbar: zone). In principle, you should not need to changes other file. You may play with the .scss file if you know what you are doing.</p>
 </div>
-<ol start="6" type="1">
-<li>Add, commit and push to the main branch.</li>
+<ol start="7" type="1">
+<li><p>Return to the main folder <code>cd ..</code></p></li>
+<li><p>Add, commit and push to the main branch.</p></li>
+<li><p>Return to the website folder <code>cd website</code> and type <code>quarto publish gh-pages</code>. This should automatically trigger and update of the <a href="https://cophyteam.github.io/project-template">website</a> after a few minutes (you can check the deployment process <a href="https://github.com/cophyteam/project-template/actions">here</a>)</p></li>
 </ol>
-<p>7 Type <code>cd website</code> and <code>quarto publish gh-pages</code>. This should automatically trigger and update of the <a href="https://cophyteam.github.io/project-template">website</a> after a few minutes (you can check the deployment process <a href="https://github.com/cophyteam/project-template/actions">here</a>)</p>
 <p>Simple, isn’t it?</p>
 
 

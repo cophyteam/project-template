@@ -1,10 +1,14 @@
 ---
-title: Main tutorial for Cophy Project
+title: Why Quarto?
 toc: true
 execute: 
   echo: true
   freeze: true
 ---
+
+:::{.callout-note}
+This tutorial will be improved soon.
+:::
 
 <!--To start, we learn how to write down a :blush: smiley. Top priority-->
 You can use this template (and Quarto) in multiple ways. Obviously, you can use it on your personal computer(s), but you can also use directly on a shared server like the CRNL cluster (see the dedicated tuto). 

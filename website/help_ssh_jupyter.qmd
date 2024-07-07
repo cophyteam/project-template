@@ -1,5 +1,6 @@
 ---
 title: Using Interactive Jupyter over SSH
+author: Romain Ligneul
 toc: true
 execute: 
   echo: true

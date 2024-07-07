@@ -1,5 +1,6 @@
 ---
 title: Quick tutorial for Git/Github
+author: Romain Ligneul
 toc: true
 execute: 
   echo: true

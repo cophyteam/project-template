@@ -1,10 +1,17 @@
 ---
 title: Quarto without Sudo rights on Linux
+author: Romain Ligneul
 toc: true
 execute: 
   echo: true
   freeze: true
 ---
+
+:::{.callout-note}
+This tutorial will be improved soon.
+:::
+
+First, activate a conda environment that has Jupyter.
 
 Here are the steps to follow. Open a command line and type:
 ```{bash}{ .sourceCode .bash .code-with-copy}
