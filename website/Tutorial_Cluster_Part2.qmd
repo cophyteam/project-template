@@ -7,7 +7,7 @@ execute:
 author: Romain Ligneul
 ---
 
-{{< downloadthis "Tutorial_Cluster_Part2.ipynb" label="Download this notebook" >}}
+{{< downloadthis www/Tutorial_Cluster_Part2.ipynb dname="Tutorial_Cluster_Part2.ipynb" label="Download this notebook" >}}
 
 :::{.callout-note}
 If you are working on the CRNL cluster, you can find also the corresponding notebook at this location: `/crnldata/projets_communs/tutorials/`

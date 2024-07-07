@@ -8,9 +8,9 @@ author: Romain Ligneul
 
 Since we have a brand-new cluster, it is a good time to improve your way of using it if you had always felt that your workflow was not optimal. This tutorial will help you to set up your personal environment if you use Python.
 
-{{< downloadthis "Tutorial_Cluster_Part1.ipynb" label="Download this notebook" >}}
+{{< downloadthis www/Tutorial_Cluster_Part1.ipynb dname="Tutorial_Cluster_Part1.ipynb" label="Download this notebook" >}}
 
-::: callout-note
+:::{.callout-note}
 If you are working on the CRNL cluster, you can find also the corresponding notebook at this location: `/crnldata/projets_communs/tutorials/`
 :::
 
@@ -213,4 +213,4 @@ if clean_jobs_live==False:
 
 ### Next part
 
-[Click here to go to Part 2]('./Tutorial_Cluster_Part1')
+[Click here to go to Part 2](./Tutorial_Cluster_Part2.html)
