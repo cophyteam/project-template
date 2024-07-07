@@ -7,6 +7,11 @@ execute:
 author: Romain Ligneul
 ---
 
+{{< downloadthis "Tutorial_Cluster_Part2.ipynb" label="Download this notebook" >}}
+
+:::{.callout-note}
+If you are working on the CRNL cluster, you can find also the corresponding notebook at this location: `/crnldata/projets_communs/tutorials/`
+:::
 
 If you managed to complete the first part of this tutorial, you will also be able to `pip install` whatever in your virtual environment and do some computing.
 However, there is more to know.

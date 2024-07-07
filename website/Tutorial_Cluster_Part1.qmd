@@ -6,68 +6,57 @@ execute:
 author: Romain Ligneul
 ---
 
-Since we have a brand-new cluster, it is a good time to improve your way of using it if you had always felt that your workflow was not optimal.
-This tutorial will help you to set up your personal environment if you use Python.
+Since we have a brand-new cluster, it is a good time to improve your way of using it if you had always felt that your workflow was not optimal. This tutorial will help you to set up your personal environment if you use Python.
 
+{{< downloadthis "Tutorial_Cluster_Part1.ipynb" label="Download this notebook" >}}
+
+::: callout-note
+If you are working on the CRNL cluster, you can find also the corresponding notebook at this location: `/crnldata/projets_communs/tutorials/`
+:::
 
 ## Install miniconda to manage your virtual environment
 
-Installing miniconda is not incompatible with using venv later on. 
+Installing miniconda is not incompatible with using venv later on.
 
-Open a terminal and type the following commands: <br>
-`cd ~`<br>
-`wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh`<br>
-`bash Miniconda3-latest-Linux-x86_64.sh`<br>
-`source ~/.bashrc`
+Open a terminal and type the following commands: <br> `cd ~`<br> `wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh`<br> `bash Miniconda3-latest-Linux-x86_64.sh`<br> `source ~/.bashrc`
 
 Follow the instructions and say yes to everything (you make press Ctrl+C once followed by Enter to skip the text faster)
 
-NB: In JupyterLab, you can open a new terminal at 'File->New->Terminal'. You can then bring this terminal just below your notebook by clicking on its tab and dragging it toward the lower part of the window.
+NB: In JupyterLab, you can open a new terminal at 'File-\>New-\>Terminal'. You can then bring this terminal just below your notebook by clicking on its tab and dragging it toward the lower part of the window.
 
 ## Create your first conda environment
 
-Still in the terminal, type: <br>
-`conda create -n crnlenv python=3.9` <br>
-`conda activate crnlenv`
+Still in the terminal, type: <br> `conda create -n crnlenv python=3.9` <br> `conda activate crnlenv`
 
-The crnlenv virtual environment is active!
-Everything that will be installed from now on will only be accessible when crnlenv has been activated
+The crnlenv virtual environment is active! Everything that will be installed from now on will only be accessible when crnlenv has been activated
 
 ## Make your conda environment visible to Jupyter lab
 
-Still in the terminal type: <br>
-`conda install ipykernel` <br>
-`python -m ipykernel install --user --name crnlenv --display-name "Python (crnlenv)"`
+Still in the terminal type: <br> `conda install ipykernel` <br> `python -m ipykernel install --user --name crnlenv --display-name "Python (crnlenv)"`
 
-This commands allow your kernel to be accessed from Jupyter Lab, not only from the command line.
-If you create more conda environments / kernels, you will also have to run these lines
+This commands allow your kernel to be accessed from Jupyter Lab, not only from the command line. If you create more conda environments / kernels, you will also have to run these lines
 
 ## Populate your conda environment / kernel with essential tools
 
-Install a package that allow to submit your jobs easily from any Jupyter notebook on Slurm<br>
-`conda install submitit`
+Install a package that allow to submit your jobs easily from any Jupyter notebook on Slurm<br> `conda install submitit`
 
-Install numpy <br>
-`conda install numpy`
+Install numpy <br> `conda install numpy`
 
-Install a memory_profiler<br>
-`pip install memory_profiler -U`
-
+Install a memory_profiler<br> `pip install memory_profiler -U`
 
 Later on you could install various other tools in your virtual environment, but the priority is to check that you can use the cluster and distribute your jobs.
 
-NB: if you wonder why install alternatively with conda or pip, the answer is: you can almost always do it with pip but if it works with conda, the package might be "better" installed in some case. 
+NB: if you wonder why install alternatively with conda or pip, the answer is: you can almost always do it with pip but if it works with conda, the package might be "better" installed in some case.
 
 ## Let's start computing
 
-Since we had , you should be able to see the crnlenv in Jupyterlab if you go in "Kernel->Change Kernel".
+Since we had , you should be able to see the crnlenv in Jupyterlab if you go in "Kernel-\>Change Kernel".
 
-**Select it** and then restart the kernel ("Kernel->Restart Kernel") to continue this tutorial.
+**Select it** and then restart the kernel ("Kernel-\>Restart Kernel") to continue this tutorial.
 
 On the top right of this window, you should see something like "Python (crnlenv)". It means your notebook is running in the right virtual environment!
 
-From now on, you will execute the code cells below, in order.
-You can do it either by pressing the play button (at the top of the notebook) or by clicking in the target cell and pressing Shift+Enter.
+From now on, you will execute the code cells below, in order. You can do it either by pressing the play button (at the top of the notebook) or by clicking in the target cell and pressing Shift+Enter.
 
 You may also want to check the tutorials of the module [submitit](https://github.com/facebookincubator/submitit) used here.
 
@@ -222,3 +211,6 @@ if clean_jobs_live==False:
   print(finished_results)
 ```
 
+### Next part
+
+[Click here to go to Part 2]('./Tutorial_Cluster_Part1')
