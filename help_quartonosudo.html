@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Romain Ligneul">
 
 <title>Quarto without Sudo rights on Linux – Cophy Project</title>
 <style>
@@ -121,13 +122,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="./getstarted.html"> 
-<span class="menu-text">Get started</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-cluster-tutorial" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Cluster tutorial</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-cluster-tutorial">    
+        <li>
+    <a class="dropdown-item" href="./Tutorial_Cluster_Part1.html">
+ <span class="dropdown-text">Part 1</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./Tutorial_Cluster_Part2.html">
+ <span class="dropdown-text">Part 2</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="./tutorial.html"> 
-<span class="menu-text">Main tutorial</span></a>
+<span class="menu-text">Quarto tutorial</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-other-tutorials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -145,10 +157,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="./help_ssh_jupyter.html">
  <span class="dropdown-text">Interactive Jupyter over SSH</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./help_quartonosudo.html">
- <span class="dropdown-text">Quarto without Sudo</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./help_zotero.html">
@@ -192,6 +200,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Romain Ligneul </p>
+          </div>
+  </div>
     
   
     
@@ -202,6 +216,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This tutorial will be improved soon.</p>
+</div>
+</div>
+<p>First, activate a conda environment that has Jupyter.</p>
 <p>Here are the steps to follow. Open a command line and type:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode {bash} bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">`</span><span class="fu">wget</span> https://github.com/quarto-dev/quarto-cli/releases/download/v1.4.504/quarto-1.4.504-linux-amd64.tar.gz<span class="kw">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode {bash} bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">`</span><span class="fu">mkdir</span> ~/opt<span class="kw">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

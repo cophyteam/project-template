@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Main tutorial for Cophy Project – Cophy Project</title>
+<title>Why Quarto? – Cophy Project</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -87,13 +87,24 @@ ul.task-list li input[type="checkbox"] {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="./getstarted.html"> 
-<span class="menu-text">Get started</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-cluster-tutorial" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Cluster tutorial</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-cluster-tutorial">    
+        <li>
+    <a class="dropdown-item" href="./Tutorial_Cluster_Part1.html">
+ <span class="dropdown-text">Part 1</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./Tutorial_Cluster_Part2.html">
+ <span class="dropdown-text">Part 2</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link active" href="./tutorial.html" aria-current="page"> 
-<span class="menu-text">Main tutorial</span></a>
+<span class="menu-text">Quarto tutorial</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-other-tutorials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -111,10 +122,6 @@ ul.task-list li input[type="checkbox"] {
         <li>
     <a class="dropdown-item" href="./help_ssh_jupyter.html">
  <span class="dropdown-text">Interactive Jupyter over SSH</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./help_quartonosudo.html">
- <span class="dropdown-text">Quarto without Sudo</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./help_zotero.html">
@@ -158,7 +165,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Main tutorial for Cophy Project</h1>
+<h1 class="title">Why Quarto?</h1>
 </div>
 
 
@@ -175,6 +182,19 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This tutorial will be improved soon.</p>
+</div>
+</div>
 <!--To start, we learn how to write down a :blush: smiley. Top priority-->
 <p>You can use this template (and Quarto) in multiple ways. Obviously, you can use it on your personal computer(s), but you can also use directly on a shared server like the CRNL cluster (see the dedicated tuto). One of the main advantages of Quarto for collaborative writing is that it is perfectly integrated with Visual Code (other IDEs also have their neat extensions, like JupyterLab, Rstudio or Neovim) and Zotero. Another big advantage is to facilitate <strong>a lot</strong> the integration of data processing and figure generation with the writing process. It can even use methods to automatically rewrite your statistics in the main text, each time you re-run an analysis. :blush:</p>
 <!--Here you see how to make an h2 title :) other title sizes are # ## ### #### ##### ######. By the way, you might have noticed that Markdown comments are totally ignored: you won't even see empty lines in place of them in the rendered version. How convenient to exchange diverse feedback, ideas and references with colleagues, without cluttering the output!-->
