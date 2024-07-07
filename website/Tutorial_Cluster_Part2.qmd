@@ -325,20 +325,6 @@ In any case, it is a good idea to run `os.system('kill ' + str(os.getpid()))`
 
 ## Comments, questions?
 
-If you have a Github account you can comment below.
+Feel free to comment below
 
-<script src="https://giscus.app/client.js"
-        data-repo="cophyteam/project-template"
-        data-repo-id="R_kgDOKt7a2g"
-        data-category="CommentsWebsite"
-        data-category-id="DIC_kwDOKt7a2s4CgoKJ"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="preferred_color_scheme"
-        data-lang="en"
-        crossorigin="anonymous"
-        async>
-</script>
+{{< include _comment_box.qmd >}}
