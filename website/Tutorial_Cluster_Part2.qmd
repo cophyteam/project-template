@@ -27,12 +27,12 @@ That why evaluating the amount of memory you need and the maximum time that a no
 
 Similarly, you may need to decide how many CPUs will be useful for you. Can you go with only one without losing much? Then use only 1. Do you divide your computation time by a huge factor if you use more, then use more. But how will you know?
 
- What follows should help you with all this.
+What follows should help you with all this.
 
-### Anticipating time-memory consumption
+### Anticipating time & memory consumption
 
-Hereafter, we use memory_usage, which has a slighty unusual way of passing arguments to its target function.
-All positional arguments (those without an = sign in the *def*) are passed together, and all non-positional arguments (also called key-pairs) are passed together.
+Hereafter, we use memory_usage() which has a slighty unusual way of passing arguments to its target function.
+All positional arguments (those without an = sign in the *def*) are passed together, and all non-positional arguments (also called key-value pairs) are passed together.
 For example, we could try:<br>
 `mem_usage=memory_usage((somefunc,(0.1,4,0.88), {'file' : 'whatever.csv','index' : 0 }))` <br>
 If we had a function defined like this: <br>
@@ -130,7 +130,7 @@ print('### Do you think that increasing the number of CPUs made a big difference
     
 ```
 
-Now let's redo exactly the same thing, with with a numpy function may benefit from multiple CPUs (i.e. np.dot).
+Now let's redo exactly the same thing, with a numpy function that may benefit from multiple CPUs (i.e. np.dot).
 
 ```{python}
 import numpy as np
@@ -191,7 +191,6 @@ while njobs_finished<jcount:
         njobs_finished=njobs_finished+1
 
 print('\n### Do you think that increasing the number of CPUs made a big difference? ###')
-print('\n### MaxRSS indicates the memory used ###')
 ```
 
 ### Scaling up **responsibly**
@@ -211,15 +210,15 @@ print("### CPU counts: \nA: core you currently use (notebook) \nI: available \nO
 !sinfo -o%C
 
 # check some stats of our last job
-print('### CPU time and MaxRSS of our last job (about 1Gb should be added to your MaxRSS in order to cover safely the memory needs of the python runtime)###')
+print('### CPU time and MaxRSS of our last job (about 1000Mb should be added to your MaxRSS (Mb) in order to cover safely the memory needs of the python runtime)###')
 os.system(f'sacct -j {job.job_id} --format="CPUTime,MaxRSS"')
 ```
 
 ### A more compact approach
 
-In the above examples, we have decomposed most operations using for loops in order to illustrate the different concepts. But with more advanced methods we can compact a lot the code used above.
+In the above examples, we have decomposed most operations using `for` loops in order to illustrate the different concepts. But with more advanced methods we can compact a lot the code used.
 
-The example below (taken from [submitit documentation](https://github.com/facebookincubator/submitit/blob/main/docs/examples.md)) allows getting rid of the job submission loop and directly map our input arrays to job submissions, using executor.map_array and some asynchronous operations.
+The example below (adapted from [submitit documentation](https://github.com/facebookincubator/submitit/blob/main/docs/examples.md)) allows getting rid of the job submission loop and directly map our input arrays to job submissions, using executor.map_array and some asynchronous operations.
 Note that such compact approach might be more difficult to debug.
 
 ```{python}
@@ -268,10 +267,10 @@ Often, when we have very long jobs, we want to submit these jobs, go home and co
 
 In this case, we **should not** expect our notebook to be still alive when we come back. Instead, we should adopt the more standard approach of writing down our results and load them in a new jupyter session afterwards!
 
-This is way will we simulate in the final example below.
+This is what we illustrate in the final example below.
 
 ```{python}
-# write in job_output within our home directory (~ is synonymous of /home/username/)
+# write in job_output within our directory
 job_output_folder=os.getcwd()+'/tuto_output/'
 
 # make sure our output folder exists
@@ -296,12 +295,13 @@ c=[job_output_folder]*len(b)
 assert len(a)==len(b)==len(c)
 
 # prepare executor
-executor = submitit.AutoExecutor(folder="joblogs")
+executor = submitit.AutoExecutor(folder="tuto_logs")
 
 # define maxjobs to a low value to illustrate
 maxjobs=3
 
-# the pupdate_parameters(slurm_array_parallelism=maxjobs, mem_gb=2, timeout_min=4, slurm_partition="CPU", cpus_per_task=1)
+# pass parameter to the executor
+executor.update_parameters(slurm_array_parallelism=maxjobs, mem_gb=2, timeout_min=4, slurm_partition="CPU", cpus_per_task=1)
 
 # execute the job (note the .map_array command that different from the .submit command used above)
 jobs = executor.map_array(simple_function_write, a, b, c)  # just a list of jobs

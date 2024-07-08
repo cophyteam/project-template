@@ -50,7 +50,7 @@ NB: if you wonder why install alternatively with conda or pip, the answer is: yo
 
 ## Let's start computing
 
-Since we had , you should be able to see the crnlenv in Jupyterlab if you go in "Kernel-\>Change Kernel".
+You should be able to see the crnlenv in Jupyterlab if you go in "Kernel-\>Change Kernel".
 
 **Select it** and then restart the kernel ("Kernel-\>Restart Kernel") to continue this tutorial.
 
@@ -90,12 +90,15 @@ def yourFunction(argument1, argument2):
     results=''
     for i in range(argument1):
         results=results+'_'+argument2
+
+    # send the results back to the notebook
     return results
 ```
 
 ```{python}
 # check time and memory usage of your function
-# ideally, try to test it with the input values that will produce the biggest memory consumption
+# ideally, try to test it with the input values that will produce the biggest memory consumption 
+# such as the largest file in your dataset or the most fine-grained parameters for your analysis
 start_time = time.time()
 mem_usage=memory_usage((yourFunction, (3,'consumption',)))
 end_time = time.time()
@@ -107,7 +110,7 @@ print('Time taken (in s): %s' % (end_time-start_time))
 ```{python}
 #### Set some environment variables for our jobs
 ### for some reason, some default values are set on the cluster, which do not match 
-### each other and submitit will complain
+### each other and submitit will complain (this cell might not be needed in the future or on other infrastructures)
 import os
 os.environ['SLURM_CPUS_PER_TASK'] = '1'
 os.environ['SLURM_TRES_PER_TASK'] = os.environ['SLURM_CPUS_PER_TASK']
@@ -115,7 +118,7 @@ os.environ['SLURM_TRES_PER_TASK'] = os.environ['SLURM_CPUS_PER_TASK']
 
 ```{python}
 #### define some array for which each item will be associated with an independent job on the cluster
-#### when you execute this cells, the jobs are sent to the cluster 
+#### when you execute these cells, the jobs are sent to the cluster 
 
 # here we define an array of numbers: since this array will be used to feed the first argument of yourFunction
 # and that yourFunction waits for as many second as its first argument, the jobs will return in the wrong order
@@ -124,9 +127,6 @@ array_parallel=[1, 20, 2, 5]
 
 # define an additional parameter to be passed to the function
 additional_parameter='whatever'
-
-# define a variable that will be outside the scope of the function
-variable_outside_scope = 'something'
 
 # initialize a list in which our returning jobs will be stored
 joblist=[]
@@ -185,7 +185,7 @@ while njobs_finished<jcount:
     print("last job finished: " + job.job_id)
     # obtain result from job
     job_result=job.result()
-    # do some processing with this job (we could directly do print(job.results() though obviously!)
+    # do some processing with this job
     print(job_result)
     # decide what to do with the finished job object
     if clean_jobs_live:
@@ -211,12 +211,18 @@ if clean_jobs_live==False:
   print(finished_results)
 ```
 
+:::{.callout-warning}
+If you do not clean your jobs on the fly, then you might saturate the memory of your notebook with `clean_jobs_live=False` because all the job results will be present in the job objects of joblist.
+Only use this approach if the objects returned by your jobs are light and can be loaded in your limited notebook memory.
+Otherwise, use an approach similar to that implemented by `clean_jobs_live=True`
+:::
+
 ### Next part
 
 [Click here to go to Part 2](./Tutorial_Cluster_Part2.html)
 
 ## Comments, questions?
 
-Feel free to comment below
+Feel free to comment below to signal a bug, ask a question, etc.
 
 {{< include _comment_box.qmd >}}
