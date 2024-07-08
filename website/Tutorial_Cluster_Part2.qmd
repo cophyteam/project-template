@@ -325,6 +325,6 @@ In any case, it is a good idea to run `os.system('kill ' + str(os.getpid()))`
 
 ## Comments, questions?
 
-Feel free to comment below
+Feel free to comment below.
 
 {{< include _comment_box.qmd >}}
