@@ -212,9 +212,9 @@ if clean_jobs_live==False:
 ```
 
 :::{.callout-warning}
-If you do not clean your jobs on the fly, then you might saturate the memory of your notebook with `clean_jobs_live=False` because all the job results will be present in the job objects of joblist.
+If you do not clean your jobs on the fly, then you might saturate the memory of your notebook with `clean_jobs_live=False` because all the job results will be present in the job objects of joblist. 
 Only use this approach if the objects returned by your jobs are light and can be loaded in your limited notebook memory.
-Otherwise, use an approach similar to that implemented by `clean_jobs_live=True`
+Otherwise, use an approach similar to that implemented by `clean_jobs_live=True`.
 :::
 
 ### Next part
