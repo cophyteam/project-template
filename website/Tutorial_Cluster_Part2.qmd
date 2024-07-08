@@ -2,7 +2,7 @@
 title: 'Part 2: Good practices'
 format: html
 execute:
-  freeze: true
+  freeze: false
   eval: false
 author: Romain Ligneul
 ---

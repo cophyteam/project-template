@@ -1,7 +1,7 @@
 ---
 title: 'Part 1: A fresh start on the CRNL cluster'
 execute:
-  freeze: true
+  freeze: false
   eval: false
 author: Romain Ligneul
 ---
