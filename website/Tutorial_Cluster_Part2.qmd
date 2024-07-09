@@ -308,6 +308,7 @@ executor.update_parameters(slurm_array_parallelism=maxjobs, mem_gb=2, timeout_mi
 jobs = executor.map_array(simple_function_write, a, b, c)  # just a list of jobs
 print('### all jobs submitted ###')
 print('the kernel will now be killed (and your notebook will crash) but you can see that your jobs keep running by typing squeue in the terminal')
+print('crucially, the content of tuto_output/ will still be updated in the background!')
 
 # wait a little and kill manually the kernel process
 time.sleep(3)

@@ -10,7 +10,8 @@ about:
     - icon: cup-hot-fill
       text: Cophy
       href: https://cophyteam.wixsite.com/website-1
-
+aliases:
+  - /
 ---
 
 This website provides information about the template used for new scientific projects in the COPHY team. Like the template itself, the website may change and grow over time.
