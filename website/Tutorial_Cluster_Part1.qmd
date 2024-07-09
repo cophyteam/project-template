@@ -38,7 +38,7 @@ This commands allow your kernel to be accessed from Jupyter Lab, not only from t
 
 ## Populate your conda environment / kernel with essential tools
 
-Install a package that allow to submit your jobs easily from any Jupyter notebook on Slurm<br> `conda install submitit`
+Install a package that allow to submit your jobs easily from any Jupyter notebook on Slurm<br> `conda install -c conda-forge submitit`
 
 Install numpy <br> `conda install numpy`
 
