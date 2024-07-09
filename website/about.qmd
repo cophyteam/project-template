@@ -11,7 +11,8 @@ about:
       text: Cophy
       href: https://cophyteam.wixsite.com/website-1
 aliases:
-  - index.html
+  - ./index.html
+  - ./
 ---
 
 This website provides information about the template used for new scientific projects in the COPHY team. Like the template itself, the website may change and grow over time.
